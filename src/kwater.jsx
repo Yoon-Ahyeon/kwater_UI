@@ -16,15 +16,27 @@ const Kwater = () => {
     return (
         <div>
             <Header />
-            <Info />
-            <SensorData />
-            {/* <PacsType />  */}
-            {/* <PacsAmount />  */}
-            {/* <FutureTurbidity />  */}
-            {/* <DataGraph />  */}
+            <ContentWrapper>
+                <Info />
+                <FirstBox style={{ display: 'flex' }}>
+                    <SensorData />
+                    <PacsType />
+                    <PacsAmount /> 
+                </FirstBox>
+                {/* <FutureTurbidity />  */}
+                {/* <DataGraph />  */}
+            </ContentWrapper>
         </div>
     );
 };
 
 export default Kwater;
 
+const ContentWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
+const FirstBox = styled.div`
+    display: flex;
+`;

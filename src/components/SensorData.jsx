@@ -19,11 +19,11 @@ const SensorData = () => {
             <SensorBox>
                 {lastEntryData && lastEntryData.탁도 ? (
                     <SensorInfo>
-                        <InfoText><strong>탁도: </strong> {lastEntryData.탁도.toFixed(3)}&nbsp;NTU</InfoText>
+                        <InfoText><strong>Turbidity: </strong> {lastEntryData.탁도.toFixed(3)}&nbsp;NTU</InfoText>
                         <InfoText><strong>pH: </strong>{lastEntryData.pH.toFixed(3)}</InfoText>
-                        <InfoText><strong>수온: </strong>{lastEntryData.수온.toFixed(3)}&nbsp;℃</InfoText>
-                        <InfoText><strong>전기전도도: </strong>{lastEntryData.전기전도도.toFixed(3)}&nbsp;mS/cm</InfoText>
-                        <InfoText><strong>알칼리도: </strong>{lastEntryData.알칼리도.toFixed(3)}&nbsp;mg/L</InfoText>
+                        <InfoText><strong>Temperature: </strong>{lastEntryData.수온.toFixed(3)}&nbsp;℃</InfoText>
+                        <InfoText><strong>Conductivity: </strong>{lastEntryData.전기전도도.toFixed(3)}&nbsp;mS/cm</InfoText>
+                        <InfoText><strong>Alkalinity: </strong>{lastEntryData.알칼리도.toFixed(3)}&nbsp;mg/L</InfoText>
                     </SensorInfo>
                 ) : (
                     console.log("No data available.")
@@ -40,15 +40,14 @@ const SensorContainer = styled.div`
 `;
 
 const SensorBox  = styled.div`
-    width: 350px; 
+    width: 400px; 
     height: 350px; 
     margin-top: 50px;
-    padding-right: 100px;
     background: white; 
     border-radius: 20px; 
     border: 3px #F9B20A solid; 
+    display: flex;
     align-items: center; 
-    display: inline-flex
 `;
 
 const SensorInfo  = styled.div`
