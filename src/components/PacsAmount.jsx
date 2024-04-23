@@ -21,7 +21,7 @@ const PacsAmount = () => {
             <PacsBox>
                 <Title>Coagulation Amount</Title>
                 <Amount>
-                    <AmountText>{pacs.toFixed(3)}</AmountText>
+                    <AmountText>{pacs}</AmountText>
                 </Amount>
             </PacsBox>
         </PacsContainer>
@@ -62,7 +62,7 @@ const Amount = styled.div`
     justify-content: center;
     font-size: 24px;
     margin-top: 30px;
-    border-radius: 20px;
+    border-radius: 50px;
     padding-top: 25px;
     padding-bottom: 25px;
 `;

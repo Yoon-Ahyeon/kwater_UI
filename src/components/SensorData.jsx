@@ -19,11 +19,11 @@ const SensorData = () => {
             <SensorBox>
                 {lastEntryData && lastEntryData.탁도 ? (
                     <SensorInfo>
-                        <InfoText><strong>Turbidity: </strong> {lastEntryData.탁도.toFixed(3)}&nbsp;NTU</InfoText>
-                        <InfoText><strong>pH: </strong>{lastEntryData.pH.toFixed(3)}</InfoText>
-                        <InfoText><strong>Temperature: </strong>{lastEntryData.수온.toFixed(3)}&nbsp;℃</InfoText>
-                        <InfoText><strong>Conductivity: </strong>{lastEntryData.전기전도도.toFixed(3)}&nbsp;mS/cm</InfoText>
-                        <InfoText><strong>Alkalinity: </strong>{lastEntryData.알칼리도.toFixed(3)}&nbsp;mg/L</InfoText>
+                        <InfoText><strong>Turbidity: </strong> {lastEntryData.탁도.toFixed(2)}&nbsp;NTU</InfoText>
+                        <InfoText><strong>pH: </strong>{lastEntryData.pH.toFixed(2)}</InfoText>
+                        <InfoText><strong>Temperature: </strong>{lastEntryData.수온.toFixed(2)}&nbsp;℃</InfoText>
+                        <InfoText><strong>Conductivity: </strong>{lastEntryData.전기전도도.toFixed(2)}&nbsp;mS/cm</InfoText>
+                        <InfoText><strong>Alkalinity: </strong>{lastEntryData.알칼리도.toFixed(2)}&nbsp;mg/L</InfoText>
                     </SensorInfo>
                 ) : (
                     console.log("No data available.")
@@ -55,5 +55,5 @@ const SensorInfo  = styled.div`
 `;
 
 const InfoText = styled.p`
-    font-size : 25px;
+    font-size : 27px;
 `;

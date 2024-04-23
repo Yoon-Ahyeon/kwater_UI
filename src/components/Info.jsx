@@ -42,11 +42,11 @@ const Info = () => {
         <InfoBox>
             <TimeInfo>
                 <EarthImg src={earth} alt="Earth Image" />
-                <InfoText><strong>DATE:</strong>&nbsp;{currentTime.toLocaleDateString()} {currentTime.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false })}</InfoText>
+                <InfoText><strong>DATE</strong>&nbsp;{currentTime.toLocaleDateString()} {currentTime.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false })}</InfoText>
             </TimeInfo>
             <ClimateInfo>
                 <TimeImg src={time} alt="Time Image" />
-                <InfoText><strong>Global Climate Crisis Time:</strong>&nbsp;{timeLeft.days} days {timeLeft.hours}:{timeLeft.minutes}:{timeLeft.seconds}</InfoText>
+                <InfoText><strong>GLOBAL CLIMATE CRISIS TIME</strong>&nbsp;{timeLeft.days} days {timeLeft.hours}:{timeLeft.minutes}:{timeLeft.seconds}</InfoText>
             </ClimateInfo>
         </InfoBox>
     );

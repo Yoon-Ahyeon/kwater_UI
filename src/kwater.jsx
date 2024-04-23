@@ -23,8 +23,10 @@ const Kwater = () => {
                     <PacsType />
                     <PacsAmount /> 
                 </FirstBox>
-                {/* <FutureTurbidity />  */}
-                {/* <DataGraph />  */}
+                <SecondBox style={{ display: 'flex' }}>
+                    <FutureTurbidity /> 
+                    <DataGraph /> 
+                </SecondBox>
             </ContentWrapper>
         </div>
     );
@@ -38,5 +40,9 @@ const ContentWrapper = styled.div`
 `;
 
 const FirstBox = styled.div`
+    display: flex;
+`;
+
+const SecondBox = styled.div`
     display: flex;
 `;
