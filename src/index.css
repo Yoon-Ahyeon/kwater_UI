@@ -2,3 +2,13 @@
 body {
   background-color: #E6F5FF; /* 파란색 */
 }
+
+@font-face {
+  font-family: "Pretendard-Regular";
+  font-weight: normal;
+  src: url("./fonts/Pretendard-Regular.otf") format("truetype");
+}
+
+body {
+  font-family: "Pretendard-Regular";
+}

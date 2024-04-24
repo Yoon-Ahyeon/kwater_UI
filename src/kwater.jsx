@@ -8,6 +8,8 @@ import PacsAmount from '../src/components/PacsAmount';
 import FutureTurbidity from '../src/components/FutureTurbidity';
 import DataGraph from '../src/components/DataGraph';
 
+import LogoImg from '../src/assets/character.png';
+
 const Kwater = () => {
     useEffect(() => {
         // Any initial setup can go here if needed
@@ -28,6 +30,7 @@ const Kwater = () => {
                     <DataGraph /> 
                 </SecondBox>
             </ContentWrapper>
+            {/* <KwaterImg src = {LogoImg} alt = "Kwater Img" /> */}
         </div>
     );
 };
@@ -46,3 +49,12 @@ const FirstBox = styled.div`
 const SecondBox = styled.div`
     display: flex;
 `;
+
+// const KwaterImg = styled.img`
+//     margin-left: auto; 
+//     margin-bottom: 100px;
+//     display: block; 
+//     width: 100px;
+//     height: 100px;
+//     margin-top: 30px;
+// `;

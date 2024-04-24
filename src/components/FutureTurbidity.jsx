@@ -23,13 +23,15 @@ const FutureTurbidity = () => {
     return (
         <FutureContainer>
             <FutureBox>
-                <FutureText>1시간 후 원수 탁도:</FutureText>
+                <FutureText>Turbidity After 1 hour:</FutureText>
                 <FutureAmount>
-                    <AmountText>{futureOne}</AmountText>
+                    {/* 숫자 유효성 검사 후 toFixed 적용 */}
+                    <AmountText>{futureOne !== null ? futureOne.toFixed(2) : 'N/A'}</AmountText>
                 </FutureAmount>
-                <FutureText>2시간 후 원수 탁도:</FutureText>
+                <FutureText>Turbidity After 2 hours:</FutureText>
                 <FutureAmount>
-                    <AmountText>{futureTwo}</AmountText>
+                    {/* 숫자 유효성 검사 후 toFixed 적용 */}
+                    <AmountText>{futureTwo !== null ? futureTwo.toFixed(2) : 'N/A'}</AmountText>
                 </FutureAmount>
             </FutureBox>
         </FutureContainer>
@@ -58,7 +60,6 @@ const FutureBox = styled.div`
 const FutureText = styled.div`
     color: black;
     font-size: 27px;
-    font-family: Inter;
     font-weight: 600;
     word-wrap: break-word;
     margin-top: 15px;

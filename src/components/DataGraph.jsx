@@ -8,8 +8,8 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip,
 
 const DataGraph = () => {
     const [lastTenEntries, setLastTenEntries] = useState([]);
-    const [selectedVariable, setSelectedVariable] = useState('탁도'); 
-    const [graphData, setGraphData] = useState({ labels: [], datasets: [] }); 
+    const [selectedVariable, setSelectedVariable] = useState('PACS투입률'); 
+    const [graphData, setGraphData] = useState({ labels: [], datasets: [] });
 
     useEffect(() => {
         if (data.length > 10) {
@@ -19,7 +19,6 @@ const DataGraph = () => {
         }
     }, []);
 
-    // options 객체를 여기에 정의합니다.
     const options = {
         responsive: true,
         plugins: {
@@ -30,63 +29,62 @@ const DataGraph = () => {
                 mode: 'index',
                 intersect: false,
             },
-        },
-        title: {
-            display: true,
-            text: `${selectedVariable}'s graph`
+            title: { 
+                display: true,
+                text: `${selectedVariable}'s Graph`,  // 백틱 사용 예시
+                position: 'top',
+            }
         },
         scales: {
             x: {
                 display: true,
                 title: {
                     display: true,
-                    text: 'Date',
+                    text: 'LogTime',
                 },
             },
             y: {
                 display: true,
                 title: {
                     display: true,
-                    text: 'Value',
+                    text: `${selectedVariable}`,  // 백틱 사용하여 변수를 문자열로 변환
                 },
             },
         },
     };
+    
 
-    // 그래프 데이터 업데이트
     useEffect(() => {
         const labels = lastTenEntries.map(entry => entry.logTime.slice(-5));
         const newGraphData = {
             labels,
             datasets: [
                 {
-                    label: '', // 레이블을 빈 문자열로 설정
-                    data: lastTenEntries.map(entry => {
-                        return entry[selectedVariable] !== undefined ? entry[selectedVariable] : null;
-                    }),
-                    borderColor: 'rgb(255, 99, 132)',
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    data: lastTenEntries.map(entry => entry[selectedVariable] !== undefined ? entry[selectedVariable] : null),
+                    borderColor: 'black', // 선의 색상을 검은색으로 변경
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)', // 포인트의 배경색을 검은색으로 변경
                 },
             ],
-        };        
+        };
         setGraphData(newGraphData);
-    }, [lastTenEntries, selectedVariable]); // selectedVariable을 의존성 배열에 추가
+    }, [lastTenEntries, selectedVariable]);
 
     const handleSelectChange = (event) => {
-        setSelectedVariable(event.target.value); // 선택된 변수 업데이트
+        setSelectedVariable(event.target.value);
     };
 
     return (
         <GraphContainer>
-            <select onChange={handleSelectChange} value={selectedVariable}>
-                <option value="탁도">Turbidity</option>
-                <option value="pH">pH</option>
-                <option value="수온">Temperature</option>
-                <option value="전기전도도">Conductivity</option>
-                <option value="알칼리도">Alkalinity</option>
-                <option value="PACS투입률">Coagulation</option>
-                <option value="원수유입유량">Water Amount</option>                </select>
             <GraphBox>
+                <GraphSelect onChange={handleSelectChange} value={selectedVariable}>
+                    <GraphOption value="탁도">Turbidity</GraphOption>
+                    <GraphOption value="pH">pH</GraphOption>
+                    <GraphOption value="수온">Temperature</GraphOption>
+                    <GraphOption value="전기전도도">Conductivity</GraphOption>
+                    <GraphOption value="알칼리도">Alkalinity</GraphOption>
+                    <GraphOption value="PACS투입률">PACS Rate</GraphOption>
+                    <GraphOption value="원수유입유량">Water Amount</GraphOption>
+                </GraphSelect>
                 <Line data={graphData} options={options} />
             </GraphBox>
         </GraphContainer>
@@ -99,8 +97,8 @@ const GraphContainer = styled.div`
 `;
 
 const GraphBox = styled.div`
-    width: 100%;
-    height: 350px;
+    width: 810px;
+    height: 320px;
     margin-top: 50px;
     background: white;
     border-radius: 20px;
@@ -111,5 +109,18 @@ const GraphBox = styled.div`
     justify-content: center;
 `;
 
-export default DataGraph;
+const GraphSelect = styled.select`
+    position: relative;
+    width: 150px;
+    height: 35px;
+    border-radius: 4px;
+    border: 2px solid;
+    font-size: 13px;
+`;
 
+const GraphOption = styled.option`
+    padding: 3px 0;
+    font-size: 17px;
+`;
+
+export default DataGraph;

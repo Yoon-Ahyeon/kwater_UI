@@ -4,14 +4,15 @@ import data from '../db.json';
 
 const PacsAmount = () => {
     const [lastEntryData, setLastEntryData] = useState({});
-    const [pacs, setPacs] = useState(null);
+    const [pacs, setPacs] = useState(0); // 초기 값을 0으로 설정
 
     useEffect(() => {
         if (data.length > 0) {
             const lastEntry = data[data.length - 1];
             setLastEntryData(lastEntry);
-            if (lastEntry.PACS투입률 !== undefined) {
-                setPacs(lastEntry.PACS투입률);
+            const pacsValue = parseFloat(lastEntry.PACS투입률); // 값을 파싱하여 숫자로 변환
+            if (!isNaN(pacsValue)) { // 숫자인지 확인
+                setPacs(pacsValue);
             }
         }
     }, [data]);
@@ -19,9 +20,9 @@ const PacsAmount = () => {
     return (
         <PacsContainer>
             <PacsBox>
-                <Title>Coagulation Amount</Title>
+                <Title>PACS RATE</Title>
                 <Amount>
-                    <AmountText>{pacs}</AmountText>
+                    <AmountText>{pacs.toFixed(2)}</AmountText> {/* pacs가 숫자일 때만 이 코드가 실행됩니다 */}
                 </Amount>
             </PacsBox>
         </PacsContainer>
