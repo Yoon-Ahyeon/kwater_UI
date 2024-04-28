@@ -17,13 +17,13 @@ const SensorData = () => {
     return (
         <SensorContainer>
             <SensorBox>
-                {lastEntryData && lastEntryData.탁도 ? (
+                {lastEntryData && lastEntryData.turbidity ? (
                     <SensorInfo>
-                        <InfoText><strong>Turbidity: </strong> {lastEntryData.탁도.toFixed(2)}&nbsp;NTU</InfoText>
+                        <InfoText><strong>Turbidity: </strong> {lastEntryData.turbidity.toFixed(2)}&nbsp;NTU</InfoText>
                         <InfoText><strong>pH: </strong>{lastEntryData.pH.toFixed(2)}</InfoText>
-                        <InfoText><strong>Temperature: </strong>{lastEntryData.수온.toFixed(2)}&nbsp;℃</InfoText>
-                        <InfoText><strong>Conductivity: </strong>{lastEntryData.전기전도도.toFixed(2)}&nbsp;mS/cm</InfoText>
-                        <InfoText><strong>Alkalinity: </strong>{lastEntryData.알칼리도.toFixed(2)}&nbsp;mg/L</InfoText>
+                        <InfoText><strong>Temperature: </strong>{lastEntryData.water_temp.toFixed(2)}&nbsp;℃</InfoText>
+                        <InfoText><strong>Conductivity: </strong>{lastEntryData.electric.toFixed(2)}&nbsp;mS/cm</InfoText>
+                        <InfoText><strong>Alkalinity: </strong>{lastEntryData.alkali.toFixed(2)}&nbsp;mg/L</InfoText>
                     </SensorInfo>
                 ) : (
                     console.log("No data available.")

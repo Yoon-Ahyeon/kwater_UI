@@ -8,7 +8,7 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip,
 
 const DataGraph = () => {
     const [lastTenEntries, setLastTenEntries] = useState([]);
-    const [selectedVariable, setSelectedVariable] = useState('PACS투입률'); 
+    const [selectedVariable, setSelectedVariable] = useState('PACS_rate'); 
     const [graphData, setGraphData] = useState({ labels: [], datasets: [] });
 
     useEffect(() => {
@@ -77,13 +77,13 @@ const DataGraph = () => {
         <GraphContainer>
             <GraphBox>
                 <GraphSelect onChange={handleSelectChange} value={selectedVariable}>
-                    <GraphOption value="탁도">Turbidity</GraphOption>
+                    <GraphOption value="turbidity">Turbidity</GraphOption>
                     <GraphOption value="pH">pH</GraphOption>
-                    <GraphOption value="수온">Temperature</GraphOption>
-                    <GraphOption value="전기전도도">Conductivity</GraphOption>
-                    <GraphOption value="알칼리도">Alkalinity</GraphOption>
-                    <GraphOption value="PACS투입률">PACS Rate</GraphOption>
-                    <GraphOption value="원수유입유량">Water Amount</GraphOption>
+                    <GraphOption value="water_temp">Temperature</GraphOption>
+                    <GraphOption value="electric">Conductivity</GraphOption>
+                    <GraphOption value="alkali">Alkalinity</GraphOption>
+                    <GraphOption value="PACS_rate">PACS Rate</GraphOption>
+                    <GraphOption value="influent_flow">Influent Flow</GraphOption>
                 </GraphSelect>
                 <Line data={graphData} options={options} />
             </GraphBox>

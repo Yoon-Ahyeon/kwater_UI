@@ -10,7 +10,7 @@ const PacsAmount = () => {
         if (data.length > 0) {
             const lastEntry = data[data.length - 1];
             setLastEntryData(lastEntry);
-            const pacsValue = parseFloat(lastEntry.PACS투입률); // 값을 파싱하여 숫자로 변환
+            const pacsValue = parseFloat(lastEntry.PACS_rate); // 값을 파싱하여 숫자로 변환
             if (!isNaN(pacsValue)) { // 숫자인지 확인
                 setPacs(pacsValue);
             }
