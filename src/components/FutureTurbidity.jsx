@@ -15,8 +15,11 @@ const FutureTurbidity = () => {
     const [lastEntryData, setLastEntryData] = useState({});
     const [futureOne, setFutureOne] = useState(null);
     const [futureTwo, setFutureTwo] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+    const [isThresholdModalOpen, setIsThresholdModalOpen] = useState(false);
     const [modalContent, setModalContent] = useState([]);
+    const [turbidityThreshold, setTurbidityThreshold] = useState(50);
+    const [pendingThreshold, setPendingThreshold] = useState(50); // Temporary threshold before confirmation
 
     useEffect(() => {
         if (data.length > 0) {
@@ -29,27 +32,40 @@ const FutureTurbidity = () => {
 
     useEffect(() => {
         let content = [];
-        if (futureOne !== null && futureOne > 50) {
+        if (futureOne !== null && futureOne > turbidityThreshold) {
             content.push({ time: '1 hour', value: futureOne });
         }
-        if (futureTwo !== null && futureTwo > 50) {
+        if (futureTwo !== null && futureTwo > turbidityThreshold) {
             content.push({ time: '2 hours', value: futureTwo });
         }
         if (content.length > 0) {
             setModalContent(content);
-            setIsModalOpen(true);
+            setIsAlertModalOpen(true);
         }
-    }, [futureOne, futureTwo]);
+    }, [futureOne, futureTwo, turbidityThreshold]);
 
-    const closeModal = () => {
-        setIsModalOpen(false);
-    }
+    const closeAlertModal = () => {
+        setIsAlertModalOpen(false);
+    };
+
+    const openThresholdModal = () => {
+        setIsThresholdModalOpen(true);
+    };
+
+    const closeThresholdModal = () => {
+        setIsThresholdModalOpen(false);
+    };
+
+    const applyThreshold = () => {
+        setTurbidityThreshold(pendingThreshold);
+        closeThresholdModal();
+    };
 
     return (
         <FutureContainer>
             <Modal
-                isOpen={isModalOpen}
-                onRequestClose={closeModal}
+                isOpen={isAlertModalOpen}
+                onRequestClose={closeAlertModal}
                 contentLabel="High Turbidity Alert"
                 style={{
                     content: {
@@ -71,19 +87,59 @@ const FutureTurbidity = () => {
                         <ModalInfo key={index}>Turbidity After {item.time}: {item.value.toFixed(2)}, which exceeds the standard.</ModalInfo>
                     ))}
                 </Modaldiv>
-                <ModalButton onClick={closeModal}>Close</ModalButton>
+                <ModalButton onClick={closeAlertModal}>Close</ModalButton>
+            </Modal>
+
+            <Modal
+                isOpen={isThresholdModalOpen}
+                onRequestClose={closeThresholdModal}
+                contentLabel="Set High Turbidity Threshold"
+                style={{
+                    content: {
+                        top: '50%',
+                        left: '50%',
+                        bottom: 'auto',
+                        right: 'auto',
+                        width: '600px',
+                        height: '400px',
+                        marginRight: '-50%',
+                        textAlign: 'center',
+                        transform: 'translate(-50%, -50%)'
+                    }
+                }}
+            >
+                <ModalText>Set High Turbidity Threshold</ModalText>
+                <p>You can set a High Turbidity Threshold.</p>
+                <p>We'll provide turbidity alerts based on the threshold you set.</p>
+                <div style={{ display: 'block', margin: '20px 0' }}>
+                    <ThresholdInput
+                        type="number"
+                        value={pendingThreshold}
+                        onChange={e => setPendingThreshold(Number(e.target.value))}
+                        placeholder="Set Threshold"
+                    />
+                </div>
+                <div style={{ display: 'block', margin: '20px 0' }}>
+                    <ThresholdButton onClick={applyThreshold}>Apply</ThresholdButton>
+                </div>
             </Modal>
 
             <FutureBox>
                 <FutureText>Turbidity After 1 hour:</FutureText>
-                <FutureAmountOne highTurbidity1={futureOne !== null && futureOne > 50}>
+                <FutureAmountOne highTurbidity1={futureOne !== null && futureOne > turbidityThreshold}>
                     <AmountText>{futureOne !== null ? futureOne.toFixed(2) : 'N/A'}</AmountText>
                 </FutureAmountOne>
                 <FutureText>Turbidity After 2 hours:</FutureText>
-                <FutureAmountTwo highTurbidity2={futureTwo !== null && futureTwo > 50}>
+                <FutureAmountTwo highTurbidity2={futureTwo !== null && futureTwo > turbidityThreshold}>
                     <AmountText>{futureTwo !== null ? futureTwo.toFixed(2) : 'N/A'}</AmountText>
                 </FutureAmountTwo>
             </FutureBox>
+            <ThresholdDiv>
+                <ThresholdText onClick={openThresholdModal}>
+                    Set Threshold
+                </ThresholdText>
+            </ThresholdDiv>
+
         </FutureContainer>
     );
 };
@@ -166,4 +222,45 @@ const AmountText = styled.p`
     text-align: center;
     font-size: 30px;
     margin-top: 20px;
+`;
+
+const ThresholdButton = styled.button`
+    width: 150px;
+    height: 40px;
+    margin-top: 20px;
+    font-size: 18px;
+    background: #B8E6E1;
+    border: 2px #2FA599 solid;
+    border-radius: 10px;
+`;
+
+const ThresholdInput = styled.input`
+    width: 200px;
+    height: 60px;
+    font-size: 30px;
+    margin-top: 30px;
+    text-align: center;
+    border-radius: 10px;
+    border: 3px solid;
+`;
+
+const ThresholdDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+`;
+
+
+const ThresholdText = styled.p`
+    text-align: center;
+    font-size: 15px;
+    background: white;
+    border-radius: 10px;
+    width: 80%;
+    padding: 10px;
+
+    &:hover {
+        background: #F3F5FF;
+        cursor: pointer;
+    }
 `;

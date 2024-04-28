@@ -12,7 +12,16 @@ import LogoImg from '../src/assets/character.png';
 
 const Kwater = () => {
     useEffect(() => {
-        // Any initial setup can go here if needed
+        // Function to update data
+        const updateData = () => {
+            console.log("Updating data..."); 
+        };
+
+        // Set interval to update data every minute
+        const intervalId = setInterval(updateData, 60000);
+
+        // Clean up interval on component unmount
+        return () => clearInterval(intervalId);
     }, []);
 
     return (
@@ -23,14 +32,14 @@ const Kwater = () => {
                 <FirstBox style={{ display: 'flex' }}>
                     <SensorData />
                     <PacsType />
-                    <PacsAmount /> 
+                    <PacsAmount />
                 </FirstBox>
                 <SecondBox style={{ display: 'flex' }}>
-                    <FutureTurbidity /> 
-                    <DataGraph /> 
+                    <FutureTurbidity />
+                    <DataGraph />
                 </SecondBox>
             </ContentWrapper>
-            {/* <KwaterImg src = {LogoImg} alt = "Kwater Img" /> */}
+            {/* <KwaterImg src={LogoImg} alt="Kwater Img" /> */}
         </div>
     );
 };

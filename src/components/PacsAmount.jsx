@@ -4,14 +4,14 @@ import data from '../db.json';
 
 const PacsAmount = () => {
     const [lastEntryData, setLastEntryData] = useState({});
-    const [pacs, setPacs] = useState(0); // 초기 값을 0으로 설정
+    const [pacs, setPacs] = useState(0); 
 
     useEffect(() => {
         if (data.length > 0) {
             const lastEntry = data[data.length - 1];
             setLastEntryData(lastEntry);
-            const pacsValue = parseFloat(lastEntry.PACS_rate); // 값을 파싱하여 숫자로 변환
-            if (!isNaN(pacsValue)) { // 숫자인지 확인
+            const pacsValue = parseFloat(lastEntry.PACS_rate); 
+            if (!isNaN(pacsValue)) {
                 setPacs(pacsValue);
             }
         }
@@ -22,7 +22,7 @@ const PacsAmount = () => {
             <PacsBox>
                 <Title>PACS RATE</Title>
                 <Amount>
-                    <AmountText>{pacs.toFixed(2)}</AmountText> {/* pacs가 숫자일 때만 이 코드가 실행됩니다 */}
+                    <AmountText>{pacs.toFixed(2)}</AmountText> 
                 </Amount>
             </PacsBox>
         </PacsContainer>
@@ -55,7 +55,7 @@ const Title = styled.div`
 `;
 
 const Amount = styled.div`
-    border: 5px #FF6969 solid;
+    border: 2px #FF6969 dotted;
     width: 90%; /* 내용의 가로 너비 조정 */
     height: 100px;
     display: flex;
@@ -66,6 +66,7 @@ const Amount = styled.div`
     border-radius: 50px;
     padding-top: 25px;
     padding-bottom: 25px;
+    background: #FFE3DB;
 `;
 
 const AmountText= styled.div`
