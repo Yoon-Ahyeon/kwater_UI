@@ -2,72 +2,51 @@ import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend } from 'chart.js';
 import styled from 'styled-components';
-import data from '../db.json';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
 
-const DataGraph = () => {
-    const [lastTenEntries, setLastTenEntries] = useState([]);
-    const [selectedVariable, setSelectedVariable] = useState('PACS_rate'); 
-    const [graphData, setGraphData] = useState({ labels: [], datasets: [] });
+const DataGraph = ({dataGraph}) => {
+    // console.log("**GraphData: ", dataGraph)
 
-    useEffect(() => {
-        if (data.length > 10) {
-            setLastTenEntries(data.slice(-10));
-        } else {
-            setLastTenEntries(data);
-        }
-    }, []);
+    const variables = {
+        Turbidity: 1,
+        pH: 2,
+        Water_Temperature: 3,
+        Electrical_Conductivity: 4,
+        Alkalinity: 5,
+        PACS_Rate: 6, 
+        Raw_Water_Inflow: 7
+    };
+    
+    const [selectedVariable, setSelectedVariable] = useState("PACS_Rate"); 
+    const [graphData, setGraphData] = useState({ labels: [], datasets: [] });
 
     const options = {
         responsive: true,
         plugins: {
-            legend: {
-                display: false,
-            },
-            tooltip: {
-                mode: 'index',
-                intersect: false,
-            },
-            title: { 
-                display: true,
-                text: `${selectedVariable}'s Graph`,  // 백틱 사용 예시
-                position: 'top',
-            }
+            legend: { display: false },
+            tooltip: { mode: 'index', intersect: false },
+            title: { display: true, text: `${selectedVariable}'s Graph`, position: 'top' }
         },
         scales: {
-            x: {
-                display: true,
-                title: {
-                    display: true,
-                    text: 'LogTime',
-                },
-            },
-            y: {
-                display: true,
-                title: {
-                    display: true,
-                    text: `${selectedVariable}`,  // 백틱 사용하여 변수를 문자열로 변환
-                },
-            },
+            x: { display: true, title: { display: true, text: 'Time' } },
+            y: { display: true, title: { display: true, text: selectedVariable } }
         },
     };
     
-
     useEffect(() => {
-        const labels = lastTenEntries.map(entry => entry.logTime.slice(-5));
-        const newGraphData = {
-            labels,
-            datasets: [
-                {
-                    data: lastTenEntries.map(entry => entry[selectedVariable] !== undefined ? entry[selectedVariable] : null),
-                    borderColor: 'black', // 선의 색상을 검은색으로 변경
-                    backgroundColor: 'rgba(0, 0, 0, 0.5)', // 포인트의 배경색을 검은색으로 변경
-                },
-            ],
-        };
-        setGraphData(newGraphData);
-    }, [lastTenEntries, selectedVariable]);
+        if (dataGraph && dataGraph.length > 0) {
+            const labels = dataGraph.map(entry => entry[0].slice(-5));
+            const values = dataGraph.map(entry => entry[variables[selectedVariable]]);
+            const newGraphData = {
+                labels,
+                datasets: [
+                    { label: 'Data Series', data: values, borderColor: '#568A35', backgroundColor: 'rgba(75,192,192,0.2)' }
+                ],
+            };
+            setGraphData(newGraphData);
+        }
+    }, [dataGraph, selectedVariable]);
 
     const handleSelectChange = (event) => {
         setSelectedVariable(event.target.value);
@@ -77,19 +56,21 @@ const DataGraph = () => {
         <GraphContainer>
             <GraphBox>
                 <GraphSelect onChange={handleSelectChange} value={selectedVariable}>
-                    <GraphOption value="turbidity">Turbidity</GraphOption>
+                    <GraphOption value="Turbidity">Turbidity</GraphOption>
                     <GraphOption value="pH">pH</GraphOption>
-                    <GraphOption value="water_temp">Temperature</GraphOption>
-                    <GraphOption value="electric">Conductivity</GraphOption>
-                    <GraphOption value="alkali">Alkalinity</GraphOption>
-                    <GraphOption value="PACS_rate">PACS Rate</GraphOption>
-                    <GraphOption value="influent_flow">Influent Flow</GraphOption>
+                    <GraphOption value="Water_Temperature">Temperature</GraphOption>
+                    <GraphOption value="Electrical_Conductivity">Conductivity</GraphOption>
+                    <GraphOption value="Alkalinity">Alkalinity</GraphOption>
+                    <GraphOption value="PACS_Rate">PACS Rate</GraphOption>  // 이 부분을 "PACS_Rate"로 변경했습니다.
+                    <GraphOption value="Raw_Water_Inflow">Influent Flow</GraphOption>
                 </GraphSelect>
                 <Line data={graphData} options={options} />
             </GraphBox>
         </GraphContainer>
     );
 };
+
+export default DataGraph;
 
 const GraphContainer = styled.div`
     text-align: left;
@@ -122,5 +103,3 @@ const GraphOption = styled.option`
     padding: 3px 0;
     font-size: 17px;
 `;
-
-export default DataGraph;

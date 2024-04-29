@@ -1,28 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import data from '../db.json';
 
-const PacsAmount = () => {
-    const [lastEntryData, setLastEntryData] = useState({});
-    const [pacs, setPacs] = useState(0); 
-
-    useEffect(() => {
-        if (data.length > 0) {
-            const lastEntry = data[data.length - 1];
-            setLastEntryData(lastEntry);
-            const pacsValue = parseFloat(lastEntry.PACS_rate); 
-            if (!isNaN(pacsValue)) {
-                setPacs(pacsValue);
-            }
-        }
-    }, [data]);
-
+const PacsAmount = ({dataPacs}) => {
+    // console.log("**PACSData: ", dataPacs)
     return (
         <PacsContainer>
             <PacsBox>
                 <Title>PACS RATE</Title>
                 <Amount>
-                    <AmountText>{pacs.toFixed(2)}</AmountText> 
+                    <AmountText>{dataPacs.toFixed(2)}</AmountText> 
                 </Amount>
             </PacsBox>
         </PacsContainer>

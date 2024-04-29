@@ -13,19 +13,27 @@ import DataGraph from '../src/components/DataGraph';
 import LogoImg from '../src/assets/character.png';
 
 const Kwater = () => {
-    const [data, setData] = useState({}); 
+    const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:5000/get_data')
-          .then(response => {
-            console.log("데이터 받기 성공:", response.data);
-            setData(response.data);
-          })
-          .catch(error => {
-            console.error("데이터 받기 실패:", error);
-          });
-      }, []);
-      
+        const fetchData = () => {
+            axios.get('http://127.0.0.1:5000/get_data')
+                .then(response => {
+                    console.log("데이터 받기 성공:", response.data);
+                    setData(response.data);
+                    console.log("업데이트 성공"); 
+                })
+                .catch(error => {
+                    console.error("데이터 받기 실패:", error);
+                });
+        };
+
+        fetchData();
+
+        const intervalId = setInterval(fetchData, 120000);
+
+        return () => clearInterval(intervalId);
+    }, []);
 
     return (
         <div>
@@ -33,13 +41,13 @@ const Kwater = () => {
             <ContentWrapper>
                 <Info />
                 <FirstBox style={{ display: 'flex' }}>
-                    <SensorData />
-                    <PacsType />
-                    <PacsAmount />
+                    {data.length > 0 && <SensorData dataSensor={data[data.length - 1]} />}
+                    {data.length > 0 && <PacsType dataCluster={data[data.length - 1][7]} />}
+                    {data.length > 0 && <PacsAmount dataPacs={data[data.length - 1][6]} />}
                 </FirstBox>
                 <SecondBox style={{ display: 'flex' }}>
-                    <FutureTurbidity />
-                    <DataGraph />
+                    {data.length > 0 && <FutureTurbidity dataTurbidity={data[data.length - 1]} />}
+                    {data.length > 0 && <DataGraph dataGraph={data} />}
                 </SecondBox>
             </ContentWrapper>
             {/* <KwaterImg src={LogoImg} alt="Kwater Img" /> */}

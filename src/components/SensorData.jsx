@@ -1,33 +1,19 @@
-// 아 일단 json 파일로 저장해
-// 그리고 수치 같은 것들 넣어
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import data from '../db.json';
 
-const SensorData = () => {
-    const [lastEntryData, setLastEntryData] = useState({});
-
-    useEffect(() => {
-        if (data.length > 0) {
-            const lastEntry = data[data.length - 1];
-            setLastEntryData(lastEntry);
-        }
-    }, []);
+const SensorData = ({dataSensor}) => {
+    // console.log("**SensorData: ", dataSensor)
 
     return (
         <SensorContainer>
             <SensorBox>
-                {lastEntryData && lastEntryData.turbidity ? (
-                    <SensorInfo>
-                        <InfoText><strong>Turbidity: </strong> {lastEntryData.turbidity.toFixed(2)}&nbsp;NTU</InfoText>
-                        <InfoText><strong>pH: </strong>{lastEntryData.pH.toFixed(2)}</InfoText>
-                        <InfoText><strong>Temperature: </strong>{lastEntryData.water_temp.toFixed(2)}&nbsp;℃</InfoText>
-                        <InfoText><strong>Conductivity: </strong>{lastEntryData.electric.toFixed(2)}&nbsp;mS/cm</InfoText>
-                        <InfoText><strong>Alkalinity: </strong>{lastEntryData.alkali.toFixed(2)}&nbsp;mg/L</InfoText>
-                    </SensorInfo>
-                ) : (
-                    console.log("No data available.")
-                )}
+                <SensorInfo>
+                    <InfoText><strong>Turbidity: </strong> {dataSensor[1].toFixed(2)}&nbsp;NTU</InfoText>
+                    <InfoText><strong>pH: </strong>{dataSensor[2].toFixed(2)}</InfoText>
+                    <InfoText><strong>Temperature: </strong>{dataSensor[3].toFixed(2)}&nbsp;℃</InfoText>
+                    <InfoText><strong>Conductivity: </strong>{dataSensor[4].toFixed(2)}&nbsp;mS/cm</InfoText>
+                    <InfoText><strong>Alkalinity: </strong>{dataSensor[5].toFixed(2)}&nbsp;mg/L</InfoText>
+                </SensorInfo>
             </SensorBox>
         </SensorContainer>
     );

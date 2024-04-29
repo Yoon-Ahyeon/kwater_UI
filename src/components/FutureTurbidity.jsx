@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
-import data from '../db.json';
 import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
@@ -11,24 +10,20 @@ const blink = keyframes`
   100% { opacity: 1; }
 `;
 
-const FutureTurbidity = () => {
-    const [lastEntryData, setLastEntryData] = useState({});
-    const [futureOne, setFutureOne] = useState(null);
-    const [futureTwo, setFutureTwo] = useState(null);
+const FutureTurbidity = ({dataTurbidity}) => {
+    const [futureOne, setFutureOne] = useState(dataTurbidity[9]);
+    const [futureTwo, setFutureTwo] = useState(dataTurbidity[10]);
+    // console.log("**Future Turbidity First Data: ", futureOne)
+    // console.log("**Future Turbidity Two Data: ", futureTwo)
+
     const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
     const [isThresholdModalOpen, setIsThresholdModalOpen] = useState(false);
     const [modalContent, setModalContent] = useState([]);
-    const [turbidityThreshold, setTurbidityThreshold] = useState(50);
-    const [pendingThreshold, setPendingThreshold] = useState(50); // Temporary threshold before confirmation
-
-    useEffect(() => {
-        if (data.length > 0) {
-            const lastEntry = data[data.length - 1];
-            setLastEntryData(lastEntry);
-            setFutureOne(lastEntry.future_turb_one);
-            setFutureTwo(lastEntry.future_turb_two);
-        }
-    }, []);
+    
+    const [turbidityThreshold, setTurbidityThreshold] = useState(() => {
+        return Number(localStorage.getItem('turbidityThreshold')) || 50;
+    });
+    const [pendingThreshold, setPendingThreshold] = useState(turbidityThreshold); 
 
     useEffect(() => {
         let content = [];
@@ -43,6 +38,12 @@ const FutureTurbidity = () => {
             setIsAlertModalOpen(true);
         }
     }, [futureOne, futureTwo, turbidityThreshold]);
+
+    // turbidityThreshold가 변경될 때마다 local storage에 갱신한다.
+    useEffect(() => {
+        localStorage.setItem('turbidityThreshold', turbidityThreshold);
+        console.log("turbidityThreshold Update Success ! ", turbidityThreshold)
+    }, [turbidityThreshold]);
 
     const closeAlertModal = () => {
         setIsAlertModalOpen(false);
@@ -126,11 +127,11 @@ const FutureTurbidity = () => {
 
             <FutureBox>
                 <FutureText>Turbidity After 1 hour:</FutureText>
-                <FutureAmountOne highTurbidity1={futureOne !== null && futureOne > turbidityThreshold}>
+                <FutureAmountOne highturbidity1={futureOne !== null && futureOne > turbidityThreshold}>
                     <AmountText>{futureOne !== null ? futureOne.toFixed(2) : 'N/A'}</AmountText>
                 </FutureAmountOne>
                 <FutureText>Turbidity After 2 hours:</FutureText>
-                <FutureAmountTwo highTurbidity2={futureTwo !== null && futureTwo > turbidityThreshold}>
+                <FutureAmountTwo highturbidity2={futureTwo !== null && futureTwo > turbidityThreshold}>
                     <AmountText>{futureTwo !== null ? futureTwo.toFixed(2) : 'N/A'}</AmountText>
                 </FutureAmountTwo>
             </FutureBox>
@@ -201,21 +202,21 @@ const FutureText = styled.div`
 const FutureAmountOne = styled.div`
     width: 90%;
     height: 70px;
-    background: ${({ highTurbidity1 }) => (highTurbidity1 ? '#FF9999' : '#E6F5FF')};
+    background: ${({ highturbidity1 }) => (highturbidity1 ? '#FF9999' : '#E6F5FF')};
     border-radius: 20px;
-    border: 2px ${({ highTurbidity1 }) => (highTurbidity1 ? '#FF3333' : '#2A7FCD')} solid;
+    border: 2px ${({ highturbidity1 }) => (highturbidity1 ? '#FF3333' : '#2A7FCD')} solid;
     margin: 20px;
-    animation: ${({ highTurbidity1 }) => (highTurbidity1 ? blink : 'none')} 1s linear infinite;
+    animation: ${({ highturbidity1 }) => (highturbidity1 ? blink : 'none')} 1s linear infinite;
 `;
 
 const FutureAmountTwo = styled.div`
     width: 90%;
     height: 70px;
-    background: ${({ highTurbidity2 }) => (highTurbidity2 ? '#FF9999' : '#E6F5FF')};
+    background: ${({ highturbidity2 }) => (highturbidity2 ? '#FF9999' : '#E6F5FF')};
     border-radius: 20px;
-    border: 2px ${({ highTurbidity2 }) => (highTurbidity2 ? '#FF3333' : '#2A7FCD')} solid;
+    border: 2px ${({ highturbidity2 }) => (highturbidity2 ? '#FF3333' : '#2A7FCD')} solid;
     margin: 20px;
-    animation: ${({ highTurbidity2 }) => (highTurbidity2 ? blink : 'none')} 1s linear infinite;
+    animation: ${({ highturbidity2 }) => (highturbidity2 ? blink : 'none')} 1s linear infinite;
 `;
 
 const AmountText = styled.p`

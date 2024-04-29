@@ -1,32 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
-import data from '../db.json';
 
-const PacsType = () => {
-    const [lastEntryData, setLastEntryData] = useState({});
-    const [cluster, setCluster] = useState(null);
-
-    useEffect(() => {
-        if (data.length > 0) {
-            const lastEntry = data[data.length - 1];
-            setLastEntryData(lastEntry);
-            if (lastEntry.cluster !== undefined) {
-                setCluster(lastEntry.cluster);
-            }
-        }
-    }, [data]);
+const PacsType = ({dataCluster}) => {
+    // console.log("**ClusterData: ", dataCluster)
 
     const getColor = (index) => {
-        if (index === cluster) {
-            return '#F1C962'; // Changed color for selected cluster
+        if (index === dataCluster) {
+            return '#F1C962'; 
         }
-        return '#FFFDF1'; // Default color
+        return '#FFFDF1'; 
     };
 
     return (
         <ClassContainer>
             <ClassBox>
-                {/* <p>{lastEntryData.cluster}</p> */}
                 <TurbBox color={getColor(0)}>
                     <TurbText>Low Turbidity</TurbText>
                 </TurbBox>
@@ -52,7 +39,6 @@ const ClassBox = styled.div`
     width: 400px;
     height: 350px;
     margin-top: 50px;
-    // margin-right: 100px; 
     background: white;
     border-radius: 20px;
     border: 3px #F9B20A solid;
