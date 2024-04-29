@@ -4,15 +4,11 @@
 
 ## 코드 실행 방법
 
-1. React
+# React 실행 방법
+cd kwater_UI
+npm run dev
 
-  cd kwater_UI;
-  
-  cd npm run dev;
-
-3. Flask
-
-  cd kwater_UI;
-  
-  flask run;
+# Flask 실행 방법
+cd kwater_UI
+flask run
 
