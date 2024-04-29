@@ -13,20 +13,19 @@ import DataGraph from '../src/components/DataGraph';
 import LogoImg from '../src/assets/character.png';
 
 const Kwater = () => {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState({}); 
 
     useEffect(() => {
-        fetchData();
-    }, []);
-
-    const fetchData = async () => {
-        try {
-          const response = await axios.get('http://localhost:5173/get_latest_data');
-          setData(response.data);
-        } catch (error) {
-          console.error('API 호출 중 오류 발생:', error);
-        }
-    };    
+        axios.get('http://127.0.0.1:5000/get_data')
+          .then(response => {
+            console.log("데이터 받기 성공:", response.data);
+            setData(response.data);
+          })
+          .catch(error => {
+            console.error("데이터 받기 실패:", error);
+          });
+      }, []);
+      
 
     return (
         <div>

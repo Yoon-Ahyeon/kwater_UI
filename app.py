@@ -12,7 +12,7 @@ db_name = "postgres"
 db_password = "12345678"
 db_port = "5432"
 
-def get_data_from_db1():
+def get_data_from_db():
     try:
         connection = psycopg2.connect(
             host=db_host,
@@ -36,9 +36,9 @@ def get_data_from_db1():
         print("PostgreSQL 연결 오류:", e)
         return []
 
-@app.route('/get_latest_data', methods=['GET'])
+@app.route('/get_data', methods=['GET'])
 def get_latest_data():
-    data = get_data_from_db1()
+    data = get_data_from_db()
     db_data = [
         [
             float("{:.2f}".format(value)) if isinstance(value, (float, int)) else value
@@ -47,7 +47,10 @@ def get_latest_data():
         for row in data
     ]
 
+    if not data:
+        return jsonify([])  # 데이터가 없으면 빈 배열 반환
+    
     return jsonify(db_data)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True) 
