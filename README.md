@@ -4,6 +4,10 @@
 
 ## 코드 실행 방법
 
+```
+!git clone https://github.com/Yoon-Ahyeon/kwater_UI
+```
+
 1. React 실행 방법
 
 ```
