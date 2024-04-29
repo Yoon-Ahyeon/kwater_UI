@@ -8,6 +8,7 @@
 
 ```
 cd kwater_UI
+npm install
 npm run dev
 ```
 
