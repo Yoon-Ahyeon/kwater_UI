@@ -4,14 +4,14 @@
 
 ## 코드 실행 방법
 
-# React 실행 방법
+1. React 실행 방법
 
 ```
 cd kwater_UI
 npm run dev
 ```
 
-# Flask 실행 방법
+2. Flask 실행 방법
 ```
 cd kwater_UI
 flask run
