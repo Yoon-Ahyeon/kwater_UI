@@ -24,8 +24,8 @@ def get_data_from_db():
 
         cursor = connection.cursor()
 
-        cursor.execute('SELECT * FROM kwater_pred ORDER BY "logTime" DESC LIMIT 15;')
-        data = cursor.fetchall()  # 가장 최근 레코드 15개 가져오기
+        cursor.execute('SELECT * FROM kwater_pred ORDER BY "logTime" DESC LIMIT 10;')
+        data = cursor.fetchall()  
 
         cursor.close()
         connection.close()
