@@ -39,12 +39,13 @@ def get_data_from_db():
 @app.route('/get_data', methods=['GET'])
 def get_latest_data():
     data = get_data_from_db()
+    reversed_data = list(reversed(data))
     db_data = [
         [
             float("{:.2f}".format(value)) if isinstance(value, (float, int)) else value
             for value in row
         ]
-        for row in data
+        for row in reversed_data
     ]
 
     if not data:

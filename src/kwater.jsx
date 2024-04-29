@@ -17,23 +17,27 @@ const Kwater = () => {
 
     useEffect(() => {
         const fetchData = () => {
-            axios.get('http://127.0.0.1:5000/get_data')
+            const url = `http://127.0.0.1:5000/get_data?t=${new Date().getTime()}`;
+            axios.get(url)
                 .then(response => {
                     console.log("데이터 받기 성공:", response.data);
-                    setData(response.data);
-                    console.log("업데이트 성공"); 
+                    if (JSON.stringify(data) !== JSON.stringify(response.data)) {
+                        setData(response.data);
+                        console.log("업데이트 성공");
+                    } else {
+                        console.log("새로운 데이터 없음");
+                    }
                 })
                 .catch(error => {
                     console.error("데이터 받기 실패:", error);
                 });
         };
-
+    
         fetchData();
-
         const intervalId = setInterval(fetchData, 120000);
-
         return () => clearInterval(intervalId);
     }, []);
+    
 
     return (
         <div>
