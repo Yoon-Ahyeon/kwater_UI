@@ -1,8 +1,18 @@
-# React + Vite
+# 한국수자원공사 Front-End
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+한국수자원공사 "최적의 응집제 주입률 예측 실시간 모니터링 서비스" 관련 UI입니다.
 
-Currently, two official plugins are available:
+***
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 코드 실행 방법
+
+1. React
+
+  cd kwater_UI
+  cd npm run dev
+
+3. Flask
+
+  cd kwater_UI
+  flask run
+
