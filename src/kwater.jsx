@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
 import styled from 'styled-components';
 import Header from '../src/components/Header';
 import Info from '../src/components/Info';
@@ -11,18 +13,20 @@ import DataGraph from '../src/components/DataGraph';
 import LogoImg from '../src/assets/character.png';
 
 const Kwater = () => {
+    const [data, setData] = useState([]);
+
     useEffect(() => {
-        // Function to update data
-        const updateData = () => {
-            console.log("Updating data..."); 
-        };
-
-        // Set interval to update data every minute
-        const intervalId = setInterval(updateData, 60000);
-
-        // Clean up interval on component unmount
-        return () => clearInterval(intervalId);
+        fetchData();
     }, []);
+
+    const fetchData = async () => {
+        try {
+          const response = await axios.get('http://localhost:5173/get_latest_data');
+          setData(response.data);
+        } catch (error) {
+          console.error('API 호출 중 오류 발생:', error);
+        }
+    };    
 
     return (
         <div>
