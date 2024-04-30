@@ -127,11 +127,11 @@ const FutureTurbidity = ({dataTurbidity}) => {
 
             <FutureBox>
                 <FutureText>Turbidity After 1 hour:</FutureText>
-                <FutureAmountOne highturbidity1={futureOne !== null && futureOne > turbidityThreshold}>
+                <FutureAmountOne $highturbidity={(futureOne !== null && futureOne > turbidityThreshold).toString()}>
                     <AmountText>{futureOne !== null ? futureOne.toFixed(2) : 'N/A'}</AmountText>
                 </FutureAmountOne>
                 <FutureText>Turbidity After 2 hours:</FutureText>
-                <FutureAmountTwo highturbidity2={futureTwo !== null && futureTwo > turbidityThreshold}>
+                <FutureAmountTwo $highturbidity={(futureTwo !== null && futureTwo > turbidityThreshold).toString()}>
                     <AmountText>{futureTwo !== null ? futureTwo.toFixed(2) : 'N/A'}</AmountText>
                 </FutureAmountTwo>
             </FutureBox>
@@ -202,21 +202,21 @@ const FutureText = styled.div`
 const FutureAmountOne = styled.div`
     width: 90%;
     height: 70px;
-    background: ${({ highturbidity1 }) => (highturbidity1 ? '#FF9999' : '#E6F5FF')};
+    background: ${({ $highturbidity1 }) => ($highturbidity1 === 'true' ? '#FF9999' : '#E6F5FF')};
     border-radius: 20px;
-    border: 2px ${({ highturbidity1 }) => (highturbidity1 ? '#FF3333' : '#2A7FCD')} solid;
+    border: 2px ${({ $highturbidity1 }) => ($highturbidity1 === 'true' ? '#FF3333' : '#2A7FCD')} solid;
     margin: 20px;
-    animation: ${({ highturbidity1 }) => (highturbidity1 ? blink : 'none')} 1s linear infinite;
+    animation: ${({ $highturbidity1 }) => ($highturbidity1 === 'true' ? blink : 'none')} 1s linear infinite;
 `;
 
 const FutureAmountTwo = styled.div`
     width: 90%;
     height: 70px;
-    background: ${({ highturbidity2 }) => (highturbidity2 ? '#FF9999' : '#E6F5FF')};
+    background: ${({ $highturbidity2 }) => ($highturbidity2 === 'true' ? '#FF9999' : '#E6F5FF')};
     border-radius: 20px;
-    border: 2px ${({ highturbidity2 }) => (highturbidity2 ? '#FF3333' : '#2A7FCD')} solid;
+    border: 2px ${({ $highturbidity2 }) => ($highturbidity2 === 'true' ? '#FF3333' : '#2A7FCD')} solid;
     margin: 20px;
-    animation: ${({ highturbidity2 }) => (highturbidity2 ? blink : 'none')} 1s linear infinite;
+    animation: ${({ $highturbidity2 }) => ($highturbidity2 === 'true' ? blink : 'none')} 1s linear infinite;
 `;
 
 const AmountText = styled.p`
