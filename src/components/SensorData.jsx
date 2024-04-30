@@ -8,11 +8,11 @@ const SensorData = ({dataSensor}) => {
         <SensorContainer>
             <SensorBox>
                 <SensorInfo>
-                    <InfoText><strong>Turbidity: </strong> {dataSensor[1].toFixed(2)}&nbsp;NTU</InfoText>
-                    <InfoText><strong>pH: </strong>{dataSensor[2].toFixed(2)}</InfoText>
-                    <InfoText><strong>Temperature: </strong>{dataSensor[3].toFixed(2)}&nbsp;℃</InfoText>
-                    <InfoText><strong>Conductivity: </strong>{dataSensor[4].toFixed(2)}&nbsp;mS/cm</InfoText>
-                    <InfoText><strong>Alkalinity: </strong>{dataSensor[5].toFixed(2)}&nbsp;mg/L</InfoText>
+                    <InfoText><strong>Turbidity: </strong> {dataSensor[1]}&nbsp;NTU</InfoText>
+                    <InfoText><strong>pH: </strong>{dataSensor[2]}</InfoText>
+                    <InfoText><strong>Temperature: </strong>{dataSensor[3]}&nbsp;℃</InfoText>
+                    <InfoText><strong>Conductivity: </strong>{dataSensor[4]}&nbsp;mS/cm</InfoText>
+                    <InfoText><strong>Alkalinity: </strong>{dataSensor[5]}&nbsp;mg/L</InfoText>
                 </SensorInfo>
             </SensorBox>
         </SensorContainer>

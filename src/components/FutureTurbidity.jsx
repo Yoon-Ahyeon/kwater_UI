@@ -10,11 +10,9 @@ const blink = keyframes`
   100% { opacity: 1; }
 `;
 
-const FutureTurbidity = ({dataTurbidity}) => {
-    const [futureOne, setFutureOne] = useState(dataTurbidity[9]);
-    const [futureTwo, setFutureTwo] = useState(dataTurbidity[10]);
-    // console.log("**Future Turbidity First Data: ", futureOne)
-    // console.log("**Future Turbidity Two Data: ", futureTwo)
+const FutureTurbidity = ({dataTurbOne, dataTurbTwo}) => {
+    console.log("**Future Turbidity First Data: ", dataTurbOne)
+    console.log("**Future Turbidity Two Data: ", dataTurbTwo)
 
     const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
     const [isThresholdModalOpen, setIsThresholdModalOpen] = useState(false);
@@ -27,19 +25,18 @@ const FutureTurbidity = ({dataTurbidity}) => {
 
     useEffect(() => {
         let content = [];
-        if (futureOne !== null && futureOne > turbidityThreshold) {
-            content.push({ time: '1 hour', value: futureOne });
+        if (dataTurbOne !== null && dataTurbOne > turbidityThreshold) {
+            content.push({ time: '1 hour', value: dataTurbOne });
         }
-        if (futureTwo !== null && futureTwo > turbidityThreshold) {
-            content.push({ time: '2 hours', value: futureTwo });
+        if (dataTurbTwo !== null && dataTurbTwo > turbidityThreshold) {
+            content.push({ time: '2 hours', value: dataTurbTwo });
         }
         if (content.length > 0) {
             setModalContent(content);
             setIsAlertModalOpen(true);
         }
-    }, [futureOne, futureTwo, turbidityThreshold]);
+    }, [dataTurbOne, dataTurbTwo, turbidityThreshold]);
 
-    // turbidityThreshold가 변경될 때마다 local storage에 갱신한다.
     useEffect(() => {
         localStorage.setItem('turbidityThreshold', turbidityThreshold);
         console.log("turbidityThreshold Update Success ! ", turbidityThreshold)
@@ -85,7 +82,7 @@ const FutureTurbidity = ({dataTurbidity}) => {
                 <ModalText>⛔ High Turbidity Alert</ModalText>
                 <Modaldiv>
                     {modalContent.map((item, index) => (
-                        <ModalInfo key={index}>Turbidity After {item.time}: {item.value.toFixed(2)}, which exceeds the standard.</ModalInfo>
+                        <ModalInfo key={index}>Turbidity After {item.time}: {item.value}, which exceeds the standard.</ModalInfo>
                     ))}
                 </Modaldiv>
                 <ModalButton onClick={closeAlertModal}>Close</ModalButton>
@@ -127,12 +124,12 @@ const FutureTurbidity = ({dataTurbidity}) => {
 
             <FutureBox>
                 <FutureText>Turbidity After 1 hour:</FutureText>
-                <FutureAmountOne $highturbidity={(futureOne !== null && futureOne > turbidityThreshold).toString()}>
-                    <AmountText>{futureOne !== null ? futureOne.toFixed(2) : 'N/A'}</AmountText>
+                <FutureAmountOne $highturbidity1={(dataTurbOne !== null && dataTurbOne > turbidityThreshold).toString()}>
+                    <AmountText>{dataTurbOne !== null ? dataTurbOne : 'N/A'}</AmountText>
                 </FutureAmountOne>
                 <FutureText>Turbidity After 2 hours:</FutureText>
-                <FutureAmountTwo $highturbidity={(futureTwo !== null && futureTwo > turbidityThreshold).toString()}>
-                    <AmountText>{futureTwo !== null ? futureTwo.toFixed(2) : 'N/A'}</AmountText>
+                <FutureAmountTwo $highturbidity2={(dataTurbTwo !== null && dataTurbTwo > turbidityThreshold).toString()}>
+                    <AmountText>{dataTurbTwo !== null ? dataTurbTwo : 'N/A'}</AmountText>
                 </FutureAmountTwo>
             </FutureBox>
             <ThresholdDiv>

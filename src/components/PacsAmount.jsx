@@ -8,7 +8,7 @@ const PacsAmount = ({dataPacs}) => {
             <PacsBox>
                 <Title>PACS RATE</Title>
                 <Amount>
-                    <AmountText>{dataPacs.toFixed(2)}</AmountText> 
+                    <AmountText>{dataPacs}</AmountText> 
                 </Amount>
             </PacsBox>
         </PacsContainer>

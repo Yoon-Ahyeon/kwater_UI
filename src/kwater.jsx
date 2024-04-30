@@ -50,7 +50,7 @@ const Kwater = () => {
                     {data.length > 0 && <PacsAmount dataPacs={data[data.length - 1][6]} />}
                 </FirstBox>
                 <SecondBox style={{ display: 'flex' }}>
-                    {data.length > 0 && <FutureTurbidity dataTurbidity={data[data.length - 1]} />}
+                    {data.length > 0 && <FutureTurbidity dataTurbOne={data[data.length - 1][9]} dataTurbTwo={data[data.length - 1][10]} />}
                     {data.length > 0 && <DataGraph dataGraph={data} />}
                 </SecondBox>
             </ContentWrapper>
