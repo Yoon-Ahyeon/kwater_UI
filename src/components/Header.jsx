@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import KwaterLogo from '../assets/kwater_logo.png';
+import kwaterLogo from '../assets/kwater_logo.png';
 
-const Header = () => (
-    <>
-      <HeaderContainer>
-        <img style={{ width: "200px", height: "100%" }} src={KwaterLogo} alt="K-water Logo" />
-        <Title>K-water Monitoring Platform</Title>
-      </HeaderContainer>
-      <Line />
-    </>
-);
+const Header = () => {
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const timerID = setInterval(() => setCurrentTime(new Date()), 1000);
+    return () => clearInterval(timerID);
+  }, []);
+
+  return (
+    <HeaderContainer>
+      <HeaderTable>
+        <TitleData> <LogoImg src={kwaterLogo} alt="Earth Image" /> <TitleText>K-water Monitoring Platform</TitleText></TitleData>
+        <DateData>Date: {currentTime.toLocaleDateString()} {currentTime.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false })}</DateData>
+      </HeaderTable>
+    </HeaderContainer>
+  );
+};
 
 export default Header;
 
@@ -18,22 +26,45 @@ const HeaderContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%; 
+    width: 100%;
+    margin-top: -20px;
+    margin-left: 5px;
+    
 `;
 
-const Title = styled.div`
-    color: black;
-    font-size: 65px;
+const HeaderTable = styled.div`
+    display: grid;
+    grid-template-columns: 3fr 1fr; 
+    width: 100%;
+    text-align: center;
+    border: 2px solid black;
+    background: white;
+`;
+
+const LogoImg = styled.img`
+    width: 100px;
+`;
+
+const TitleText =  styled.p`
+    margin-left: 40px;
+    font-size: 30px;
     font-weight: bold;
-    word-wrap: break-word;
-    margin-left: 30px; 
 `;
 
-const Line = styled.div`
-    border: 4px rgba(186.43, 200.52, 206.55, 0.70) solid;
-    margin-top: 30px; 
-    width : 100%;
+const TitleData = styled.div`
+    border-right: 2px solid black; 
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    height: 100%;
+    font-size: 25px;
 `;
 
-
+const DateData = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    font-size: 20px;
+`;
 
