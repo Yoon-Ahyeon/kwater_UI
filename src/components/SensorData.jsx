@@ -37,7 +37,7 @@ const SensorData = ({ dataSensor }) => {
                         </thead>
                         <tbody>
                             <tr>
-                                <SensorValue>{dataSensor[12]} mm/L</SensorValue>
+                                <SensorValue>{dataSensor[11]} mm/L</SensorValue>
                             </tr>
                         </tbody>
                     </SensorTable>

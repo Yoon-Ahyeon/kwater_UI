@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import earth from '../assets/earth.png';
 
-const Footer = () => {
+const InfoFooter = () => {
     const [currentTime, setCurrentTime] = useState(new Date());
     const targetDate = new Date("2029-12-31"); 
 
@@ -56,7 +56,7 @@ const Footer = () => {
     );
 };
 
-export default Footer;
+export default InfoFooter;
 
 const BoxContainer = styled.div`
     display: flex;

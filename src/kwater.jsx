@@ -6,7 +6,7 @@ import SensorData from '../src/components/SensorData';
 import PacsType from '../src/components/PacsType';
 import FutureTurbidity from '../src/components/FutureTurbidity';
 import DataGraph from '../src/components/DataGraph';
-import Footer from '../src/components/Footer';
+import Footer from '../src/components/InfoFooter';
 
 import axios from 'axios';
 
