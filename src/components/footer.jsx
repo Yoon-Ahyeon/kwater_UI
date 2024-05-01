@@ -97,7 +97,6 @@ const InfoText = styled.div`
 
 const ClimateText = styled.div`
     font-size: 20px;
-    margin-left: 20px;
+    margin-left: 30px;
     font-weight: bold;
-    color: #FD6F22;
 `;
