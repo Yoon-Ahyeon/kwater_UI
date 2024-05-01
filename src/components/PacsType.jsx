@@ -1,58 +1,67 @@
 import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 
-const PacsType = ({dataCluster}) => {
+const PacsType = ({dataCluster, dataPacs}) => {
     // console.log("**ClusterData: ", dataCluster)
 
-    const getColor = (index) => {
-        if (index === dataCluster) {
-            return '#F1C962'; 
-        }
-        return '#FFFDF1'; 
-    };
+    const turbidityLevels = [
+        { label: 'Low Turbidity'},
+        { label: 'Moderate Turbidity'},
+        { label: 'High Turbidity'}
+    ];
+
+    const activeTurbidity = turbidityLevels[dataCluster]; 
 
     return (
-        <ClassContainer>
-            <ClassBox>
-                <TurbBox color={getColor(0)}>
-                    <TurbText>Low Turbidity</TurbText>
+        <PacsBox>
+            <Title>Turbidity Mode:</Title>
+            <ClassContainer>
+                <TurbBox>
+                    <Text>{activeTurbidity.label}</Text>
                 </TurbBox>
-                <TurbBox color={getColor(1)}>
-                    <TurbText>Moderate Turbidity</TurbText>
-                </TurbBox>
-                <TurbBox color={getColor(2)}>
-                    <TurbText>High Turbidity</TurbText>
-                </TurbBox>
-            </ClassBox>
-        </ClassContainer>
+            </ClassContainer>
+            <PacsContainer>
+                <Title>PACS Rate:</Title>
+                <Amount>
+                    <Text>{dataPacs}</Text> 
+                </Amount>
+            </PacsContainer>
+        </PacsBox>
     );
 };
 
 export default PacsType;
 
-const ClassContainer = styled.div`
-    text-align: center;
+
+const PacsBox = styled.div`
+    width: 100%;
+    max-width: 280px; 
+    height: 250px;
+    margin-top: 30px;
     margin-left: 30px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #FD9F28;
+    padding: 0 20px;
 `;
 
-const ClassBox = styled.div`
-    width: 400px;
-    height: 350px;
-    margin-top: 50px;
-    background: white;
-    border-radius: 20px;
-    border: 3px #F9B20A solid;
-    flex-direction: column;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+const ClassContainer  = styled.div`
+    width: 100%; 
+`;
+
+const Title = styled.h1`
+    font-size: 23px;
+    margin-bottom: 10px; 
+    padding-left: 10px;
+    text-align: left;
+    padding-top: 5px;
 `;
 
 const TurbBox = styled.div`
     width: 90%;
-    height: 70px;
-    margin: 15px;
-    background: ${({ color }) => color};
+    height: 50px;
+    margin: 0 15px;
+    background: #FEEBB6;
     border-radius: 10px;
     border: 3px #F1C962 dotted; 
     display: flex;
@@ -60,8 +69,25 @@ const TurbBox = styled.div`
     align-items: center;
 `;
 
-const TurbText = styled.p`
-    font-size: 30px;
+const Text = styled.p`
+    font-size: 25px;
     font-weight: bold;
+`;
+
+const PacsContainer = styled.div`
+    margin-top: 20px;
+`;
+
+const Amount = styled.div`
+    width: 90%;
+    height: 50px;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-radius: 10px;
+    border: 3px #FECCBE dotted; 
+    background: #FFDBD1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
