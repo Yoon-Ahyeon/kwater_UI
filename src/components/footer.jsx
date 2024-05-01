@@ -62,7 +62,7 @@ const BoxContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 40px;
+    margin-top: r0px;
     padding: 25px;
     margin-bottom: -45px;
     background: #B8E9FF;
