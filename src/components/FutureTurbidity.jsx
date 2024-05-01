@@ -21,6 +21,7 @@ const FutureTurbidity = ({dataTurbOne, dataTurbTwo}) => {
     const [turbidityThreshold, setTurbidityThreshold] = useState(() => {
         return Number(localStorage.getItem('turbidityThreshold')) || 50;
     });
+
     const [pendingThreshold, setPendingThreshold] = useState(turbidityThreshold); 
 
     useEffect(() => {
@@ -39,7 +40,7 @@ const FutureTurbidity = ({dataTurbOne, dataTurbTwo}) => {
 
     useEffect(() => {
         localStorage.setItem('turbidityThreshold', turbidityThreshold);
-        console.log("turbidityThreshold Update Success ! ", turbidityThreshold)
+        console.log("turbidityThreshold Update Success ! \nturbidityThreshold : ", turbidityThreshold)
     }, [turbidityThreshold]);
 
     const closeAlertModal = () => {
@@ -82,7 +83,7 @@ const FutureTurbidity = ({dataTurbOne, dataTurbTwo}) => {
                 <ModalText>⛔ High Turbidity Alert</ModalText>
                 <Modaldiv>
                     {modalContent.map((item, index) => (
-                        <ModalInfo key={index}>Turbidity After {item.time}: {item.value}, which exceeds the standard.</ModalInfo>
+                        <ModalInfo key={index}>Turbidity After {item.time}: {item.value}, <br />which exceeds the standard.</ModalInfo>
                     ))}
                 </Modaldiv>
                 <ModalButton onClick={closeAlertModal}>Close</ModalButton>
@@ -123,11 +124,11 @@ const FutureTurbidity = ({dataTurbOne, dataTurbTwo}) => {
             </Modal>
 
             <FutureBox>
-                <FutureText>Turbidity After 1 hour:</FutureText>
+                <FutureText>Turbidity After 1 hours:</FutureText>
                 <FutureAmountOne $highturbidity1={(dataTurbOne !== null && dataTurbOne > turbidityThreshold).toString()}>
                     <AmountText>{dataTurbOne !== null ? dataTurbOne : 'N/A'}</AmountText>
                 </FutureAmountOne>
-                <FutureText>Turbidity After 2 hours:</FutureText>
+                <FutureText2>Turbidity After 2 hours:</FutureText2>
                 <FutureAmountTwo $highturbidity2={(dataTurbTwo !== null && dataTurbTwo > turbidityThreshold).toString()}>
                     <AmountText>{dataTurbTwo !== null ? dataTurbTwo : 'N/A'}</AmountText>
                 </FutureAmountTwo>
@@ -154,11 +155,11 @@ const ModalText = styled.h2`
 `;
 
 const Modaldiv = styled.div`
-    padding: 15px;
+    padding: 10px;
 `;
 
 const ModalInfo = styled.p`
-    font-size: 30px;
+    font-size: 25px;
 `;
 
 const ModalButton = styled.button`
@@ -174,52 +175,72 @@ const ModalButton = styled.button`
 `;
 
 const FutureBox = styled.div`
-    width: 400px;
-    height: 350px;
-    margin-top: 50px;
+    width: 100%;
+    max-width: 280px; 
+    height: 250px;
+
+    margin-top: 10px;
+    margin-left: 30px;
     background: white;
-    border-radius: 20px;
-    border: 3px #6AC0FF solid;
-    flex-direction: column;
-    display: flex;
-    align-items: flex-start; 
-    justify-content: center;
+    border-radius: 10px;
+    border: 1px solid #6AC0FF;
+
+    flex-direction: column; 
+    padding: 0 20px;
 `;
 
-const FutureText = styled.div`
-    color: black;
-    font-size: 27px;
-    font-weight: 600;
-    word-wrap: break-word;
-    margin-top: 15px;
+const FutureText = styled.h1`
+    font-size: 23px;
+    margin-bottom: 10px; 
+    padding-left: 10px;
     text-align: left;
-    padding-left: 25px;
+    padding-top: 5px;
+`;
+
+const FutureText2 = styled.h1`
+    font-size: 23px;
+    margin-bottom: 10px; 
+    padding-left: 10px;
+    text-align: left;
+    margin-top: 20px;
+    padding-top: 5px;
 `;
 
 const FutureAmountOne = styled.div`
     width: 90%;
-    height: 70px;
+    height: 50px;
+    margin: 0 15px;
+
+    border-radius: 10px;
+    border: 3px #18A8F1 dotted; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    border: 3px ${({ $highturbidity1 }) => ($highturbidity1 === 'true' ? '#FF3333' : '#2A7FCD')} dotted;
     background: ${({ $highturbidity1 }) => ($highturbidity1 === 'true' ? '#FF9999' : '#E6F5FF')};
-    border-radius: 20px;
-    border: 2px ${({ $highturbidity1 }) => ($highturbidity1 === 'true' ? '#FF3333' : '#2A7FCD')} solid;
-    margin: 20px;
     animation: ${({ $highturbidity1 }) => ($highturbidity1 === 'true' ? blink : 'none')} 1s linear infinite;
 `;
 
 const FutureAmountTwo = styled.div`
     width: 90%;
-    height: 70px;
+    height: 50px;
+    margin: 0 15px;
+
+    border-radius: 10px;
+    border: 3px #18A8F1 dotted; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    border: 3px ${({ $highturbidity2 }) => ($highturbidity2 === 'true' ? '#FF3333' : '#2A7FCD')} dotted;
     background: ${({ $highturbidity2 }) => ($highturbidity2 === 'true' ? '#FF9999' : '#E6F5FF')};
-    border-radius: 20px;
-    border: 2px ${({ $highturbidity2 }) => ($highturbidity2 === 'true' ? '#FF3333' : '#2A7FCD')} solid;
-    margin: 20px;
     animation: ${({ $highturbidity2 }) => ($highturbidity2 === 'true' ? blink : 'none')} 1s linear infinite;
 `;
 
 const AmountText = styled.p`
-    text-align: center;
-    font-size: 30px;
-    margin-top: 20px;
+    font-size: 25px;
+    font-weight: bold;
 `;
 
 const ThresholdButton = styled.button`
@@ -246,8 +267,10 @@ const ThresholdDiv = styled.div`
     display: flex;
     justify-content: center;
     align-items: center; 
+    margin-left: 40px;
+    width: 300px;
+    margin-top: -8px;
 `;
-
 
 const ThresholdText = styled.p`
     text-align: center;
@@ -256,6 +279,7 @@ const ThresholdText = styled.p`
     border-radius: 10px;
     width: 80%;
     padding: 10px;
+    border: 1px solid #C2C2C2;
 
     &:hover {
         background: #F3F5FF;
