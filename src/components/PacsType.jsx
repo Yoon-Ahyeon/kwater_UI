@@ -6,8 +6,9 @@ const PacsType = ({dataCluster, dataPacs}) => {
 
     const turbidityLevels = [
         { label: 'Low Turbidity'},
-        { label: 'Moderate Turbidity'},
-        { label: 'High Turbidity'}
+        { label: 'High Turbidity'},
+        { label: 'Low Turbidity'},
+        { label: 'Moderate Turbidity'}
     ];
 
     const activeTurbidity = turbidityLevels[dataCluster]; 
