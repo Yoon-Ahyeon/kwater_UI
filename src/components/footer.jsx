@@ -62,7 +62,7 @@ const BoxContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 30px;
+    margin-top: 40px;
     padding: 25px;
     margin-bottom: -45px;
     background: #B8E9FF;
@@ -97,6 +97,7 @@ const InfoText = styled.div`
 
 const ClimateText = styled.div`
     font-size: 20px;
-    margin-left: 30px;
+    margin-left: 20px;
     font-weight: bold;
+    color: #FD6F22;
 `;

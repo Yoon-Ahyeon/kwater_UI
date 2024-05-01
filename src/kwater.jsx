@@ -7,6 +7,7 @@ import PacsType from '../src/components/PacsType';
 import FutureTurbidity from '../src/components/FutureTurbidity';
 import DataGraph from '../src/components/DataGraph';
 import Footer from '../src/components/Footer';
+
 import axios from 'axios';
 
 const Kwater = () => {

@@ -37,7 +37,7 @@ const SensorData = ({ dataSensor }) => {
                         </thead>
                         <tbody>
                             <tr>
-                                <SensorValue>{dataSensor[8]} mm/L</SensorValue>
+                                <SensorValue>{dataSensor[12]} mm/L</SensorValue>
                             </tr>
                         </tbody>
                     </SensorTable>
@@ -98,8 +98,8 @@ const SensorHeader = styled.th`
     color: black;
     background-color: #FFF6DE;
     border: 1px solid #ddd;
+    text-align: center;
 `;
-
 
 const SensorHeader2 = styled.th`
     text-align: left;
@@ -108,10 +108,12 @@ const SensorHeader2 = styled.th`
     color: black;
     background-color: #DEF5FF;
     border: 1px solid #ddd;
+    text-align: center;
 `;
 
 const SensorValue = styled.td`
     text-align: left;
     padding: 12px 15px;
     border: 1px solid #ddd;
+    text-align: center;
 `;
