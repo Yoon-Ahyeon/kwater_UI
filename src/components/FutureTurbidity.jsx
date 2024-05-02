@@ -165,7 +165,7 @@ const ModalInfo = styled.p`
 const ModalButton = styled.button`
     margin-top: 20px;
     background-color: #4CAF50;
-    border: 2px green solid;
+    border: 2px #AFD485 solid;
     color: white;
     padding: 15px 32px;
     text-align: center;
@@ -183,7 +183,7 @@ const FutureBox = styled.div`
     margin-left: 30px;
     background: white;
     border-radius: 10px;
-    border: 1px solid #6AC0FF;
+    border: 2px solid #6AC0FF;
 
     flex-direction: column; 
     padding: 0 20px;

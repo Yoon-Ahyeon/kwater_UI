@@ -42,12 +42,12 @@ const HeaderTable = styled.div`
 `;
 
 const LogoImg = styled.img`
-    width: 100px;
+    width: 130px;
 `;
 
 const TitleText =  styled.p`
     margin-left: 40px;
-    font-size: 30px;
+    font-size: 35px;
     font-weight: bold;
 `;
 
@@ -66,5 +66,6 @@ const DateData = styled.div`
     justify-content: center;
     padding: 30px;
     font-size: 20px;
+    font-weight: bold;
 `;
 

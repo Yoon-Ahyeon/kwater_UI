@@ -45,7 +45,7 @@ const InfoFooter = () => {
             </ClimateContainer>
             <FooterInfo>
                 <FooterContent>
-                    © 2024 Company BigLeader. All rights reserved.
+                    © 2024 Company Kwater And BigLeader. All rights reserved.
                     <br />Members: Jongsik Jeon, Hyejoon Jeon, Ahyeon Yoon, SeungCheol Lee, Shinjeong Hwang
                 </FooterContent>
                 <FooterContent>
@@ -62,10 +62,11 @@ const BoxContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: r0px;
+    margin-top: 30px;
     padding: 25px;
     margin-bottom: -45px;
     background: #B8E9FF;
+    margin-left: 10px;
 `;
 
 const ClimateContainer = styled.div`

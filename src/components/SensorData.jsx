@@ -55,7 +55,7 @@ const SensorBox = styled.div`
     margin-top: 30px;
     background: white;
     border-radius: 10px;
-    border: 1px solid #FD9F28;
+    border: 2px solid #FD9F28;
     padding: 0 20px;
 `;
 
