@@ -27,6 +27,7 @@ npm run dev
 2. Flask 실행 방법
 ```
 cd kwater_UI
+pip install flask
 flask run
 ```
 
