@@ -28,6 +28,8 @@ npm run dev
 ```
 cd kwater_UI
 pip install flask
+pip install flask_cors
+pip install psycopg2
 flask run
 ```
 
